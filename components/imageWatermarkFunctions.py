@@ -6,6 +6,13 @@ from flask import jsonify, request
 from .uploadImageFunctions import uploadImageFromWebToServer
 import os
 
+def checkIfPathsExist():
+    #CHECK IF OUR PATHS EXISTS
+    if os.path.exists('uploadedImages') == False:
+        os.mkdir('uploadedImages')
+    if os.path.exists('watermarkedImages') == False:
+        os.mkdir('watermarkedImages')
+    
 def addWatermarkCentered(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
@@ -112,6 +119,7 @@ def addWatermarkTopLeft(text, path, size):
     return new_path
 
 def createWatermarkFunc():
+    checkIfPathsExist()
     body = request.form
     text = body['text']
     image_name = uploadImageFromWebToServer()

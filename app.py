@@ -1,15 +1,8 @@
 from flask import Flask, jsonify, render_template, request, redirect
 from components.staticFilesFunction import sendJsFile, sendUploadedFile, sendWatermarkedFile, sendCssFile, sendFontFile
 from components.imageWatermarkFunctions import createWatermarkFunc
-from os import path, mkdir
 
 app = Flask(__name__)
-
-#CHECK IF OUR PATHS EXISTS
-if path.exists('uploadedImages') == False:
-    mkdir('uploadedImages')
-if path.exists('watermarkedImages') == False:
-    mkdir('watermarkedImages')
 
 #HOMEPAGE
 @app.route('/')
