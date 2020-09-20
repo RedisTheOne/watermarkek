@@ -1,4 +1,4 @@
-from flask import request, redirect, request
+from flask import request, redirect, render_template
 from uuid import uuid4
 import os
 
@@ -6,9 +6,6 @@ import os
 def uploadImageFromWebToServer():
     image = request.files["image"]
     ext = os.path.splitext(image.filename)[len(os.path.splitext(image.filename)) - 1]
-    image.save(os.path.join('./uploadedImages', str(uuid4()) + ext))
-    return redirect('/')
-
-#ADD TEXT VIEW
-def addTextView():
-    return ''
+    name = str(uuid4()) + ext
+    image.save(os.path.join('./uploadedImages', name))
+    return name

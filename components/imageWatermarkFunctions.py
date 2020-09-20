@@ -3,16 +3,22 @@ from PIL import ImageFont
 from PIL import ImageDraw 
 from uuid import uuid4
 from flask import jsonify, request
+from .uploadImageFunctions import uploadImageFromWebToServer
 import os
 
-def addWatermarkCentered(text, path):
+def addWatermarkCentered(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
     img_width, img_height = img.size
     draw = ImageDraw.Draw(img, "RGBA")
+    sub_val = 13
+    if size == 'l':
+        sub_val = 6
+    elif size == 'm':
+        sub_val = 8
     
     #TEXT
-    font = ImageFont.truetype("font.ttf", int(img_width / 8))
+    font = ImageFont.truetype("font.ttf", int(img_width / sub_val))
     text_width, text_height = draw.textsize(text, font)
     draw.text(((img_width / 2) - (text_width / 2), (img_height / 2) - (text_height / 2)), text, fill=(255, 255, 255, 200), font=font)
     
@@ -21,14 +27,19 @@ def addWatermarkCentered(text, path):
     img.save('watermarkedImages/' + new_path)
     return new_path
 
-def addWatermarkBottomLeft(text, path):
+def addWatermarkBottomLeft(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
     img_width, img_height = img.size
     draw = ImageDraw.Draw(img, "RGBA")
+    sub_val = 13
+    if size == 'l':
+        sub_val = 6
+    elif size == 'm':
+        sub_val = 8
     
     #TEXT
-    font = ImageFont.truetype("font.ttf", 200)
+    font = ImageFont.truetype("font.ttf", int(img_width / sub_val))
     text_width, text_height = draw.textsize(text, font)
     draw.text((20, (img_height - text_height) - 20), text, fill=(255, 255, 255, 200), font=font)
     
@@ -37,14 +48,19 @@ def addWatermarkBottomLeft(text, path):
     img.save('watermarkedImages/' + new_path)
     return new_path
 
-def addWatermarkBottomRight(text, path):
+def addWatermarkBottomRight(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
     img_width, img_height = img.size
     draw = ImageDraw.Draw(img, "RGBA")
+    sub_val = 13
+    if size == 'l':
+        sub_val = 6
+    elif size == 'm':
+        sub_val = 8
     
     #TEXT
-    font = ImageFont.truetype("font.ttf", 200)
+    font = ImageFont.truetype("font.ttf", int(img_width / sub_val))
     text_width, text_height = draw.textsize(text, font)
     draw.text(((img_width - text_width) - 20, (img_height - text_height) - 20), text, fill=(255, 255, 255, 200), font=font)
     
@@ -53,14 +69,19 @@ def addWatermarkBottomRight(text, path):
     img.save('watermarkedImages/' + new_path)
     return new_path
 
-def addWatermarkTopRight(text, path):
+def addWatermarkTopRight(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
     img_width, img_height = img.size
     draw = ImageDraw.Draw(img, "RGBA")
+    sub_val = 13
+    if size == 'l':
+        sub_val = 6
+    elif size == 'm':
+        sub_val = 8
     
     #TEXT
-    font = ImageFont.truetype("font.ttf", 200)
+    font = ImageFont.truetype("font.ttf", int(img_width / sub_val))
     text_width, text_height = draw.textsize(text, font)
     draw.text(((img_width - text_width) - 20, 20), text, fill=(255, 255, 255, 200), font=font)
 
@@ -69,14 +90,19 @@ def addWatermarkTopRight(text, path):
     img.save('watermarkedImages/' + new_path)
     return new_path
 
-def addWatermarkTopLeft(text, path):
+def addWatermarkTopLeft(text, path, size):
     #IMAGE
     img = Image.open(path).convert("RGBA")
     img_width, img_height = img.size
     draw = ImageDraw.Draw(img, "RGBA")
-
+    sub_val = 13
+    if size == 'l':
+        sub_val = 6
+    elif size == 'm':
+        sub_val = 8
+    
     #TEXT
-    font = ImageFont.truetype("font.ttf", 200)
+    font = ImageFont.truetype("font.ttf", int(img_width / sub_val))
     text_width, text_height = draw.textsize(text, font)
     draw.text((20, 20), text, fill=(255, 255, 255, 200), font=font)
     
@@ -86,25 +112,40 @@ def addWatermarkTopLeft(text, path):
     return new_path
 
 def createWatermarkFunc():
-    body = request.get_json()
+    body = request.form
     text = body['text']
-    image_name = body['imageName']
+    image_name = uploadImageFromWebToServer()
+    size = body['size']
     watermark_position = body['watermarkPosition']
 
     if watermark_position == 'center':
-        return jsonify(image=addWatermarkCentered(text, os.path.join(os.getcwd(), 'uploadedImages', image_name)))
+        img = image=addWatermarkCentered(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        return jsonify(image=img)
     elif watermark_position == 'topLeft':
-        return jsonify(image=addWatermarkTopLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name)))
+        img = addWatermarkTopLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        return jsonify(image=img)
     elif watermark_position == 'topRight':
-        return jsonify(image=addWatermarkTopRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name)))
+        img = addWatermarkTopRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        return jsonify(image=img)
     elif watermark_position == 'bottomLeft':
-        return jsonify(image=addWatermarkBottomLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name)))
+        img = addWatermarkBottomLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        return jsonify(image=img)
     elif watermark_position == 'bottomRight':
-        return jsonify(image=addWatermarkBottomRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name)))
+        img = addWatermarkBottomRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        return jsonify(image=img)
+    else:
+        return jsonify(status=False)
 
 ## BODY EXAMPLE
 # {
 #     "text": "AAAAA",
 #     "imageName": "220d9ca5-b628-45b3-990c-04ae523767e5.jpg",
-#     "watermarkPosition": "center"
+#     "watermarkPosition": "center/topLeft/topRight/bottomLeft/bottomRight",
+#     "size": "sm/m/l",
+#     "image": <file>    
 # }

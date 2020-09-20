@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    font-family: Actor;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+body {
+    margin: 0;
+}
+
+/*************************************/
+.front-page {
+    min-height: 100vh;
+    background-color: #EEE2DC;
+}
+
+.front-page > h2 {
+    font-size: 35px;
+    padding: 20px 40px !important;
+    margin: 0;
+    color: #123C69;
+}
+
+.front-page > h1 {
+    font-size: 70px;
+    color: #AC3b61;
+    font-weight: bold;
+    display: block;
+    margin: 100px 0px 0px 45px;
+
+}
+
+.choose {
+    text-align: center;
+    border-radius: 10px;
+    padding: 30px 20px;
+    background-color: #edc7b7;
+    width: 60%;
+    margin: 40px auto 0px auto;
+}
+
+.choose > h3 {
+    padding: 25px 0;
+}
+
+.choice-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.choose a {
+    width: 40%;
+    text-align: center;
+    text-decoration: none;
+    color: #123c69;
+    font-size: 30px;
+    padding: 15px 20px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.507);
+
+}
+
+
+/*******************************************
+                APPLY
+*********************************************/
+
+
+.apply {
+    padding: 50px 40px;
+    height: 100vh;
+}
+
+.apply > h2 {
+    color: #AC3b61;
+    font-size: 45px;
+    display: inline-block;
+}
+
+.apply > p {
+    font-size: 30px;
+    display: inline;
+}
+
+.select span {
+    color: black;
+    font-size: 28px !important;
+    margin: 20px 0;
+}
+
+#in-text-water > *{
+    display: inline-block;
+}
+
+#in-text-water > input {
+    width: 50% !important;
+}
+
+.upload, .upload-media {
+    margin-left: 20px;
+    margin-top: -20px;
+}
+
+#in-text-water, .upload, .apply {
+    display: none;
+}

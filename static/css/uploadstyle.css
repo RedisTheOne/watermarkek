@@ -1,0 +1,104 @@
+.addApp label {
+    pointer-events: none;
+}
+
+.addApp a {
+    cursor: pointer;
+}
+
+.addApp form {
+    margin-bottom: 0;
+}
+
+.addApp .row {
+    margin-bottom: 0;
+}
+
+.addApp span {
+    margin-bottom: 0;
+}
+
+#thumbnail {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px; 
+    margin-top: 7px;
+}
+
+.addApp .btn {
+    width: 100%;
+    background-image: linear-gradient(315deg, #24dd5c 0%, #7cdb28 74%);
+    margin-bottom: 5px;
+}
+
+.addApp .uploadBtn {
+    width: 10%;
+    color: white;
+    background: rgb(31, 231, 65);
+    margin: 0;
+}
+
+.addApp .uploadBtn span {
+    width: 10%;
+    color: white;
+    background: rgb(31, 231, 65);
+}
+
+.addApp {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.addApp form {
+    height: auto;
+    margin: auto;
+    margin-top: 1%;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 1px 4px 4px grey;
+    border-radius: 6px;
+    background-color: white;
+    max-width: 400px;
+}
+
+.error-display {
+    display:none;
+    margin-bottom:15px;
+    padding:15px;
+    background-color:#fff4cc;
+    border:solid 2px #ffe070
+}
+
+
+/*#noaccount {
+    position:relative;
+    color: #696969;
+    padding-right: 20px;
+
+}*/
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 60%;
+}
+
+.modal {
+    width: 30%;
+    height:40%;
+    position: fixed;
+}
+
+.modal a {
+    width: 30%;
+    position: relative;
+}
+
+

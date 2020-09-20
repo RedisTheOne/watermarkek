@@ -1,21 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSERT EMER</title>
-</head>
-<body>
-    <h1>HOME</h1>
-    <form action="/upload-image" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-          <label>Select image</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="image" id="image">
-            <label class="custom-file-label" for="image">Select image...</label>
-          </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WATERMARKER</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="/static/css?name=style.css">  
+        <link rel="stylesheet" href="/static/css?name=uploadstyle.css">
+        <style>
+            @font-face {
+                font-family: "Actor";
+                src: url("/static/fonts?name=Actor-Regular.woff") format("woff"); /* Modern Browsers */
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="front-page">
+            <h2>Watermarker</h2>
+
+            <h1>Add your own watermark to media</h1>
+
+            <div class="choose">
+                <h3>Media of your choosing</h3>
+                <div class="choice-container">
+                    <a class="video" href="#apply">Video</a>
+                    <a class="image" href="#apply">Image</a>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-      </form>
-</body>
+        <div class="apply" id="apply">
+            <h2>Step 1:</h2><p> Upload your <span class="choice"></span></p>
+                <form action="">
+                    <div class="input-field upload-media">
+                        <br>
+                        <input class="addLogo" type="file" required="required" accept="image/png" id="imageInput">
+                        <div class="file-path-wrapper">
+                            <img id="thumbnail" src=""/>
+                            <span class="helper-text" data-error="Not suported"></span>
+                        </div>
+                    </div>
+                </form>
+            <br>
+            <br>
+            <h2>Step 2:</h2><p> Choose the watermark style</p>
+            <form class="select" action="#">
+                <p>
+                <label>
+                    <input class="with-gap" name="textwatermark" id="text" type="radio"/>
+                    <span>Text watermark</span>
+                    <div class="input-field" id="in-text-water">
+                        <input placeholder="Type your watermark" id="textInput" name="text" type="text">
+                        <button class="btn waves-effect waves-light #333333" name="action" id="submitBtn">Submit
+                        </button>
+                    </div>
+                </label>
+                </p>
+                <p>
+                <label>
+                    <input class="with-gap" name="textwatermark" type="radio"/>
+                    <span>Green</span>
+                    </label>
+                </p>
+                <p>
+                  <label>
+                    <input class="with-gap" name="textwatermark" id="image-upload" type="radio"/>
+                    <span>Upload your image</span>
+                        <div class="input-field upload">
+                            <br>
+                            <input class="addLogo" type="file" required="required" accept="image/png" >
+                            <div class="file-path-wrapper">
+                            <img id="thumbnail" src=""/>
+                            <span class="helper-text" data-error="Not suported"></span>
+                        </div>
+                  </label>
+                </p>
+            </form>
+        </div>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="/static/js?name=pic_vid.js"></script>
+        <script src="/static/js?name=upload.js"></script>
+        <script src="/static/js?name=radio.js"></script>
+    </body>
 </html>
