@@ -7,5 +7,5 @@ def uploadImageFromWebToServer():
     image = request.files["image"]
     ext = os.path.splitext(image.filename)[len(os.path.splitext(image.filename)) - 1]
     name = str(uuid4()) + ext
-    image.save(os.path.join('./uploadedImages', name))
+    image.save(os.path.join('static', 'uploadedImages', name))
     return name

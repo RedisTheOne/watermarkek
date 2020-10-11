@@ -1,2 +1,3 @@
-/uploadedImages
-/watermarkedImages
+/static/uploadedImages
+/static/watermarkedImages
+/venv

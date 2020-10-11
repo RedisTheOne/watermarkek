@@ -8,10 +8,10 @@ import os
 
 def checkIfPathsExist():
     #CHECK IF OUR PATHS EXISTS
-    if os.path.exists('uploadedImages') == False:
-        os.mkdir('uploadedImages')
-    if os.path.exists('watermarkedImages') == False:
-        os.mkdir('watermarkedImages')
+    if os.path.exists('static/uploadedImages') == False:
+        os.mkdir('static/uploadedImages')
+    if os.path.exists('static/watermarkedImages') == False:
+        os.mkdir('static/watermarkedImages')
     
 def addWatermarkCentered(text, path, size):
     #IMAGE
@@ -31,7 +31,7 @@ def addWatermarkCentered(text, path, size):
     
     #SAVE
     new_path = str(uuid4()) + '.png'
-    img.save('watermarkedImages/' + new_path)
+    img.save('static/watermarkedImages/' + new_path)
     return new_path
 
 def addWatermarkBottomLeft(text, path, size):
@@ -52,7 +52,7 @@ def addWatermarkBottomLeft(text, path, size):
     
     #SAVE
     new_path =  str(uuid4()) + '.png'
-    img.save('watermarkedImages/' + new_path)
+    img.save('static/watermarkedImages/' + new_path)
     return new_path
 
 def addWatermarkBottomRight(text, path, size):
@@ -73,7 +73,7 @@ def addWatermarkBottomRight(text, path, size):
     
     #SAVE
     new_path = str(uuid4()) + '.png'
-    img.save('watermarkedImages/' + new_path)
+    img.save('static/watermarkedImages/' + new_path)
     return new_path
 
 def addWatermarkTopRight(text, path, size):
@@ -94,7 +94,7 @@ def addWatermarkTopRight(text, path, size):
 
     #SAVE
     new_path = str(uuid4()) + '.png'
-    img.save('watermarkedImages/' + new_path)
+    img.save('static/watermarkedImages/' + new_path)
     return new_path
 
 def addWatermarkTopLeft(text, path, size):
@@ -115,7 +115,7 @@ def addWatermarkTopLeft(text, path, size):
     
     #SAVE
     new_path = str(uuid4()) + '.png'
-    img.save('watermarkedImages/' + new_path)
+    img.save('static/watermarkedImages/' + new_path)
     return new_path
 
 def createWatermarkFunc():
@@ -127,24 +127,24 @@ def createWatermarkFunc():
     watermark_position = body['watermarkPosition']
 
     if watermark_position == 'center':
-        img = image=addWatermarkCentered(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
-        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        img = image=addWatermarkCentered(text, os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name))
         return jsonify(image=img)
     elif watermark_position == 'topLeft':
-        img = addWatermarkTopLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
-        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        img = addWatermarkTopLeft(text, os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name))
         return jsonify(image=img)
     elif watermark_position == 'topRight':
-        img = addWatermarkTopRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
-        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        img = addWatermarkTopRight(text, os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name))
         return jsonify(image=img)
     elif watermark_position == 'bottomLeft':
-        img = addWatermarkBottomLeft(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
-        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        img = addWatermarkBottomLeft(text, os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(),'static', 'uploadedImages', image_name))
         return jsonify(image=img)
     elif watermark_position == 'bottomRight':
-        img = addWatermarkBottomRight(text, os.path.join(os.getcwd(), 'uploadedImages', image_name), size)
-        os.remove(os.path.join(os.getcwd(), 'uploadedImages', image_name))
+        img = addWatermarkBottomRight(text, os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name), size)
+        os.remove(os.path.join(os.getcwd(), 'static', 'uploadedImages', image_name))
         return jsonify(image=img)
     else:
         return jsonify(status=False)

@@ -33,6 +33,6 @@ submitBtn.addEventListener('click', () => {
     })
         .then(res => res.json())
         .then(data => {
-            window.location.href = `/watermarked?image=${data.image}`
+            window.location.href = `/static/watermarkedImages/${data.image}`
         })
 })
