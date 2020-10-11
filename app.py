@@ -1,17 +1,12 @@
-from flask import Flask, jsonify, render_template, request, redirect
-from components.imageWatermarkFunctions import createWatermarkFunc
+from flask import Flask
+from components.blueprints.viewsBlueprint import viewsBlueprint
+from components.blueprints.imagesBluepint import imagesBlueprint
 
 app = Flask(__name__)
 
-#HOMEPAGE
-@app.route('/')
-def index():
-    return render_template('home.html')
-
-#CREATE WATERMARK
-@app.route('/watermark/create', methods=["POST"])
-def createWatermark():
-    return createWatermarkFunc()
+# BLUEPRINTS
+app.register_blueprint(viewsBlueprint)
+app.register_blueprint(imagesBlueprint)
 
 
 if __name__ == '__main__':

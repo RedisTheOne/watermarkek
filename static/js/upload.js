@@ -27,7 +27,7 @@ submitBtn.addEventListener('click', () => {
     formData.append('text', document.getElementById('textInput').value);
     formData.append('size', 'm');
     formData.append('watermarkPosition', 'center');
-    fetch('/watermark/create', {
+    fetch('/images/watermark/create', {
         method: 'POST',
         body: formData
     })
